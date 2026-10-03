@@ -42,10 +42,10 @@ export function Setup() {
   return (
     <main className="setup">
       <div className="setup-card">
-        <p className="eyebrow">Singapore streets · hawker stalls · rent</p>
+        <p className="eyebrow">Singapore rail network · hawker stalls · rent</p>
         <h1>Makanopoly</h1>
         <p className="lede">
-          Walk the island, learn the neighbourhood dish, and keep enough cash to pay rent.
+          Walk the rail network, learn the station and its hawker dish, and keep enough cash to pay rent.
           The default match is you against Auntie May.
         </p>
         <ol className="lesson-list">
@@ -53,7 +53,7 @@ export function Setup() {
           <li>A deed is an asset. A full colour set doubles the base rent.</li>
           <li>Houses and hotels raise rent, and they tie up cash.</li>
           <li>A mortgage is a loan of half the price, plus 10% interest to close it.</li>
-          <li>A wrong street question costs S$50. Lock-up skips your movement.</li>
+          <li>A wrong station question costs S$50. Lock-up skips your movement.</li>
         </ol>
         <div className="seat-list">
           {seats.map((seat, index) => (
@@ -108,7 +108,7 @@ export function Setup() {
             </button>
           )}
         </div>
-        <p className="fine">Unofficial game for learning streets, food, and money. Pass one device around for more than one human.</p>
+        <p className="fine">Unofficial game for learning stations, food, and money. Pass one device around for more than one human.</p>
       </div>
     </main>
   )

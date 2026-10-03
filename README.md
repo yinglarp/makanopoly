@@ -1,6 +1,6 @@
 # Makanopoly
 
-A browser board game on Singapore streets. You learn the neighbourhood and its hawker food while playing the familiar money game: salary, rent, tax, mortgages, and lock-up.
+A browser board game on the Singapore rail network. You learn the station, its LTA line, and the hawker food nearby while playing the familiar money game: salary, rent, tax, mortgages, and lock-up.
 
 It is an unofficial game. It is not the commercial property-trading board game, and it does not use that game’s name, logo, or card text.
 
@@ -17,7 +17,7 @@ Open the local address Vite prints. The default match is you against Auntie May.
 
 ## The board
 
-Forty squares, priced from Tampines and Bedok up to Raffles Place and Marina Boulevard. Each street deed names the neighbourhood, one dish, and the hawker centre it belongs to — soon kueh at Tampines Round Market, chicken rice at Maxwell, satay on Boon Tat Street, and the rest of the island in between.
+Forty squares, priced from Tampines and Bedok up to Raffles Place and Gardens by the Bay. Each station deed names the LTA line, one dish, and the hawker centre nearby — soon kueh at Tampines Round Market, chicken rice at Maxwell, satay beside Tanjong Pagar, and the rest of the network in between. Line names follow the [LTA rail network](https://www.lta.gov.sg/content/ltagov/en/getting_around/public_transport/rail_network.html): North-South, East-West, North East, Circle, Downtown, and Thomson-East Coast.
 
 Four MRT lines replace the railways. PUB Water and SP Group bill from the dice. The void deck does nothing. Fines are not stored there.
 
@@ -39,4 +39,4 @@ Chance and Community Chest mix hawker outings with fees and payouts such as ERP,
 
 ## Street quiz
 
-The first time you land on a street you have not mastered, you get a three-choice question about its dish or neighbourhood. A correct answer masters the street. A wrong answer shows the right place and charges **S$50** to the bank. The AI takes the same quiz and misses about one question in four.
+The first time you land on a station you have not mastered, you get a three-choice question about its dish or its LTA line. A correct answer masters the station. A wrong answer shows the right place and charges **S$50** to the bank. The AI takes the same quiz and misses about one question in four.

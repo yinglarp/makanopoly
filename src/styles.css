@@ -87,47 +87,92 @@ p { margin: 0 0 0.7rem; }
     radial-gradient(circle at 20% 0%, #6b4226, #3a2416 42%, #24160e);
 }
 
-.board-wrap { min-width: 0; }
+.board-wrap {
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - 2rem);
+}
 .board {
-  width: min(100%, 920px);
-  margin: 0 auto;
+  width: min(100%, calc(100vh - 2rem), 980px);
   aspect-ratio: 1;
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   grid-template-rows: repeat(11, 1fr);
-  background: #e7d3a1;
-  border: 4px solid #2a2118;
+  background: #f4e7cb;
+  border: 10px solid #2a2118;
+  outline: 3px solid #c4a574;
+  outline-offset: -7px;
   border-radius: 18px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  position: relative;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.38);
+  padding: 7px;
+  gap: 2px;
 }
 
 .sq {
   position: relative;
-  display: flex;
   min-width: 0;
   min-height: 0;
   overflow: hidden;
   border: 1px solid #2a2118;
-  background: #f7f1e4;
+  background: #fffaf3;
   padding: 0;
-  border-radius: 0;
+  border-radius: 2px;
   text-align: center;
 }
-.sq.bottom { flex-direction: column; }
-.sq.top { flex-direction: column-reverse; }
-.sq.left { flex-direction: row-reverse; }
-.sq.right { flex-direction: row; }
+.sq-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  transform-origin: center center;
+}
+.sq.top .sq-face { transform: rotate(180deg); }
+.sq.left .sq-face { transform: rotate(90deg); }
+.sq.right .sq-face { transform: rotate(-90deg); }
 .sq.here { box-shadow: inset 0 0 0 2px #c23b22; }
-.bar { flex: 0 0 16%; }
-.sq.left .bar, .sq.right .bar { flex-basis: 18%; height: auto; }
-.sq-name { font-size: 0.62rem; font-weight: 700; padding: 0.1rem; }
-.sq-price { font-size: 0.58rem; color: #5c5146; }
-.pips { font-size: 0.55rem; color: #0f6e6e; }
-.owner-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; top: 2px; right: 2px; }
-.mortgage-flag { position: absolute; left: 2px; bottom: 2px; font-size: 0.55rem; font-weight: 700; }
-.occupants { position: absolute; left: 2px; right: 2px; bottom: 1px; display: flex; justify-content: center; gap: 1px; }
-.occupants .token { width: 16px; height: 16px; }
+.bar { flex: 0 0 11px; width: 100%; height: 11px; }
+.sq-copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  min-width: 0;
+  padding: 2px 4px 16px;
+  text-align: center;
+}
+.sq-name {
+  display: block;
+  width: 100%;
+  font-size: 0.68rem;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: 0;
+  text-align: center;
+  text-wrap: balance;
+}
+.sq-price, .pips {
+  display: block;
+  width: 100%;
+  font-size: 0.62rem;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: #5c5146;
+}
+.pips { color: #0f6e6e; font-weight: 700; }
+.owner-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; top: 10px; right: 3px; box-shadow: 0 0 0 1px #fffaf3; }
+.mortgage-flag { position: absolute; left: 3px; top: 9px; font-size: 0.58rem; font-weight: 700; }
+.occupants { position: absolute; z-index: 2; display: flex; justify-content: center; align-items: center; gap: 1px; pointer-events: none; }
+.sq.bottom .occupants { left: 2px; right: 2px; bottom: 2px; }
+.sq.top .occupants { left: 2px; right: 2px; top: 2px; }
+.sq.left .occupants { left: 2px; top: 2px; bottom: 2px; flex-direction: column; }
+.sq.right .occupants { right: 2px; top: 2px; bottom: 2px; flex-direction: column; }
+.occupants .token { width: 15px; height: 15px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 .center {
@@ -151,9 +196,20 @@ p { margin: 0 0 0.7rem; }
 .center-copy { max-width: 34rem; }
 .swatch { width: 42px; height: 8px; border-radius: 99px; display: block; margin: 0.3rem auto 0.6rem; }
 .dice-row { display: flex; gap: 0.6rem; margin: 0.4rem 0 0.8rem; }
-.die { width: 52px; height: 52px; display: grid; grid-template-columns: repeat(3, 1fr); background: #fff; border: 2px solid #241c16; border-radius: 8px; padding: 6px; }
+.die {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  place-items: center;
+  background: linear-gradient(180deg, #fff, #f4efe4);
+  border: 2px solid #241c16;
+  border-radius: 10px;
+  box-shadow: 0 2px 0 #c9b89a;
+}
 .die.ghost { opacity: 0.35; }
-.pip { border-radius: 50%; }
+.pip { width: 8px; height: 8px; border-radius: 50%; }
 .pip.on { background: #241c16; }
 
 .side {
@@ -168,14 +224,31 @@ p { margin: 0 0 0.7rem; }
 .side-head { justify-content: space-between; }
 .turn-actions, .modal-actions, .deed-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.7rem 0; }
 .roster { list-style: none; padding: 0; margin: 0.4rem 0 0.8rem; }
-.roster li { padding: 0.35rem 0; border-bottom: 1px solid #eadcc4; }
+.roster li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #eadcc4;
+  text-align: left;
+}
 .roster li.active strong { color: #c23b22; }
 .roster li.out { opacity: 0.45; }
-.roster span, .roster em { display: block; font-style: normal; color: #5c5146; font-size: 0.85rem; }
+.roster strong { text-align: left; }
+.roster span, .roster em {
+  font-style: normal;
+  color: #5c5146;
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
 .roster.plain { width: min(420px, 100%); }
 .lessons { margin-bottom: 0.8rem; }
 .deed { border-top: 1px solid #eadcc4; padding: 0.45rem 0; }
-.deed header { display: flex; justify-content: space-between; gap: 0.5rem; font-size: 0.92rem; }
+.deed header { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; font-size: 0.92rem; text-align: left; }
+.deed header span { text-align: right; color: #5c5146; font-variant-numeric: tabular-nums; }
 .log { padding-left: 1.1rem; color: #5c5146; font-size: 0.85rem; }
 
 .modal-back, .handoff {
@@ -209,5 +282,6 @@ th, td { text-align: left; padding: 0.25rem 0; border-bottom: 1px solid #eadcc4;
   .table { grid-template-columns: 1fr; }
   .side { max-height: none; }
   h1 { font-size: 3rem; }
-  .sq-name { font-size: 0.5rem; }
+  .sq-name { font-size: 0.58rem; }
+  .board-wrap { min-height: 0; }
 }

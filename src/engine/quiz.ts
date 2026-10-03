@@ -12,20 +12,20 @@ export function shuffle<T>(items: readonly T[], rng: () => number): T[] {
   return copy
 }
 
-export function makeQuiz(streetId: string, topic: 'dish' | 'neighbourhood', rng: () => number): Quiz {
+export function makeQuiz(streetId: string, topic: 'dish' | 'line', rng: () => number): Quiz {
   const street = getProperty(streetId)
   if (!isStreet(street)) throw new Error('Only streets have a quiz')
-  const correct = topic === 'dish' ? street.dish : street.neighborhood
+  const correct = topic === 'dish' ? street.dish : street.line
   const pool = PROPERTY_LIST.filter(isStreet)
     .filter((other) => other.id !== streetId)
-    .map((other) => (topic === 'dish' ? other.dish : other.neighborhood))
+    .map((other) => (topic === 'dish' ? other.dish : other.line))
     .filter((value) => value !== correct)
   const unique = [...new Set(pool)]
   const distractors = shuffle(unique, rng).slice(0, 2)
   const options = shuffle([correct, ...distractors], rng)
   const prompt = topic === 'dish'
-    ? `What should you eat on ${street.name}?`
-    : `Which neighbourhood is ${street.name} in?`
+    ? `What should you eat at ${street.name}?`
+    : `Which LTA rail line serves ${street.name}?`
   return {
     streetId,
     topic,

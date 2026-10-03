@@ -388,9 +388,9 @@ function resolveLanding(state: GameState, playerId: string) {
   if (square.kind !== 'property') return
   const property = getProperty(square.propertyId)
   if (isStreet(property) && !player.mastered.includes(property.id)) {
-    state.spotlight = { title: property.name, lines: ['Answer the street question. The dish and neighbourhood stay hidden until you do.'], group: property.group }
+    state.spotlight = { title: property.name, lines: ['Answer the station question. The dish and rail line stay hidden until you do.'], group: property.group }
     state.quizSerial += 1
-    state.quiz = makeQuiz(property.id, state.quizSerial % 2 === 0 ? 'dish' : 'neighbourhood', Math.random)
+    state.quiz = makeQuiz(property.id, state.quizSerial % 2 === 0 ? 'dish' : 'line', Math.random)
     state.phase = 'quiz'
     state.tip = `A wrong answer costs ${money(QUIZ_FEE)}. Getting it right masters the street.`
     return

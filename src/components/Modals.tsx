@@ -46,7 +46,7 @@ function Quiz({ state }: { state: GameState }) {
   return (
     <div className="modal-back">
       <div className="modal" role="dialog" aria-labelledby="quiz-title">
-        <p className="eyebrow">Street question · wrong answer costs S$50</p>
+        <p className="eyebrow">Station question · wrong answer costs S$50</p>
         <h3 id="quiz-title">{quiz.prompt}</h3>
         <div className="choices">
           {quiz.options.map((option, index) => (
@@ -218,11 +218,11 @@ function DeedBody({ state, propertyId }: { state: GameState; propertyId: string 
   const showFood = isStreet(property) && foodVisible(state, propertyId)
   return (
     <div>
-      <p className="eyebrow" style={{ color: GROUP_COLOR[property.group] }}>{property.group === 'mrt' ? 'MRT line' : property.group === 'utility' ? 'Utility' : 'Street deed'}</p>
+      <p className="eyebrow" style={{ color: GROUP_COLOR[property.group] }}>{property.group === 'mrt' ? 'MRT line' : property.group === 'utility' ? 'Utility' : 'Station'}</p>
       <h3 id="buy-title">{property.name}</h3>
       <p className="price-line">{money(property.price)} · mortgage {money(mortgageValue(property.price))}</p>
       {isStreet(property) && showFood && <Food street={property} />}
-      {isStreet(property) && !showFood && <p>Land here and answer the question to learn the dish and neighbourhood.</p>}
+      {isStreet(property) && !showFood && <p>Land here and answer the question to learn the dish and the rail line.</p>}
       {!isStreet(property) && <p>{property.about}</p>}
       {isStreet(property) && <RentTable street={property} />}
     </div>
@@ -233,7 +233,7 @@ function Food({ street }: { street: StreetProperty }) {
   return (
     <div className="food">
       <strong>{street.dish}</strong>
-      <span>{street.neighborhood} · {street.hawker}</span>
+      <span>{street.line} · {street.neighborhood} · {street.hawker}</span>
       <p>{street.about}</p>
     </div>
   )

@@ -58,10 +58,8 @@ export function Sidebar({ state }: { state: GameState }) {
         {state.players.map((candidate) => (
           <li key={candidate.id} className={candidate.bankrupt ? 'out' : candidate.id === player.id ? 'active' : ''}>
             <TokenGlyph token={candidate.token} color={candidate.color} />
-            <div>
-              <strong>{candidate.name}</strong>
-              <span>{candidate.bankrupt ? 'Bankrupt' : money(candidate.cash)}</span>
-            </div>
+            <strong>{candidate.name}</strong>
+            <span>{candidate.bankrupt ? 'Bankrupt' : money(candidate.cash)}</span>
             <em>{candidate.mastered.length}/22</em>
           </li>
         ))}

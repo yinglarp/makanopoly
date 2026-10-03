@@ -44,14 +44,18 @@ function SquareView({ state, square, onInspect }: { state: GameState; square: Sq
       style={{ gridColumn: cell.col + 1, gridRow: cell.row + 1 }}
       onClick={() => property && onInspect(property.id)}
     >
-      {property && <span className="bar" style={{ background: GROUP_COLOR[property.group], color: inkFor(property.group) }} />}
-      <span className="sq-name">{property ? property.short : squareLabel(square)}</span>
-      {price && <span className="sq-price">{price}</span>}
-      {holding && holding.houses > 0 && (
-        <span className="pips">{holding.houses === 5 ? 'Hotel' : '●'.repeat(holding.houses)}</span>
-      )}
-      {owner && <span className="owner-dot" style={{ background: owner.color }} title={owner.name} />}
-      {holding?.mortgaged && <span className="mortgage-flag">M</span>}
+      <span className="sq-face">
+        {property && <span className="bar" style={{ background: GROUP_COLOR[property.group], color: inkFor(property.group) }} />}
+        <span className="sq-copy">
+          <span className="sq-name">{property ? property.short : squareLabel(square)}</span>
+          {price && <span className="sq-price">{price}</span>}
+          {holding && holding.houses > 0 && (
+            <span className="pips">{holding.houses === 5 ? 'Hotel' : `${holding.houses} hs`}</span>
+          )}
+        </span>
+        {owner && <span className="owner-dot" style={{ background: owner.color }} title={owner.name} />}
+        {holding?.mortgaged && <span className="mortgage-flag">M</span>}
+      </span>
       <span className="occupants">
         {here.map((player) => <TokenGlyph key={player.id} token={player.token} color={player.color} />)}
       </span>

@@ -52,6 +52,7 @@ export interface StreetProperty {
   houseCost: number
   rent: [number, number, number, number, number, number]
   neighborhood: string
+  line: string
   dish: string
   hawker: string
   about: string
@@ -124,7 +125,7 @@ export interface Spotlight {
 
 export interface Quiz {
   streetId: string
-  topic: 'dish' | 'neighbourhood'
+  topic: 'dish' | 'line'
   prompt: string
   options: string[]
   answer: number
